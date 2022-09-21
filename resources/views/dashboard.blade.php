@@ -14,7 +14,14 @@
             @foreach ($posts as $post)
                 <div class="flex item-center">
                     <a href="{{ route('posts.edit', $post) }}" class="bg-yellow-500 px-2 py-3 block">Editer le post</a>
-                    <a href="" class="bg-red-500 px-2 py-3 block">Supprimer le post</a>
+                    <a href="#" class="bg-red-500 px-2 py-3 block" onclick="event.preventDefault;
+                    document.getElementById('destroy-post-form-{{$post->id}}').submit();
+                    ">Supprimer le post
+                        <form action="{{ route('posts.destroy', $post) }}" method="POST" id="destroy-post-form-{{$post->id}}">
+                            @csrf
+                            @method('delete')
+                        </form>    
+                    </a>
                 </div>
             @endforeach
         </div>
